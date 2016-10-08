@@ -9,6 +9,7 @@ public class LoadNextLevelOnImpact : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision)
 	{
+		print ("here");
 		if (collision.gameObject.layer == layerOfVictory)
 		{
 			SceneManager.LoadScene (levelToLoad);

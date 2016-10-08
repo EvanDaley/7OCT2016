@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
 
@@ -64,26 +65,35 @@ public class PlayerController : MonoBehaviour {
 	
 	void Update () 
 	{
-		if (Input.GetButtonDown ("Fire1"))
+		if (EventSystem.current.IsPointerOverGameObject ())
 		{
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			if (Physics.Raycast (ray, out hit, 100, layerMask))
-			{
-				HandleTouch (hit.point);
-			}
-		}
-
-		for (int i = 0; i < Input.touchCount; i++)
+		} else
 		{
-			Touch touch = Input.GetTouch (i);
-			if (touch.phase == TouchPhase.Began)
+			if (Input.GetButtonDown ("Fire1"))
 			{
 				RaycastHit hit;
-				Ray ray = Camera.main.ScreenPointToRay (touch.position);
+				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 				if (Physics.Raycast (ray, out hit, 100, layerMask))
 				{
 					HandleTouch (hit.point);
+				}
+			}
+
+
+			for (int i = 0; i < Input.touchCount; i++)
+			{
+				Touch touch = Input.GetTouch (i);
+				if (touch.phase == TouchPhase.Began)
+				{
+					if (touch.position.x > (Screen.width / 4) || touch.position.y < (3*Screen.height / 4))
+					{
+						RaycastHit hit;
+						Ray ray = Camera.main.ScreenPointToRay (touch.position);
+						if (Physics.Raycast (ray, out hit, 100, layerMask))
+						{
+							HandleTouch (hit.point);
+						}
+					}
 				}
 			}
 		}

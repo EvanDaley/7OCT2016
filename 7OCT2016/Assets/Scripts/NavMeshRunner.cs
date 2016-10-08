@@ -24,4 +24,5 @@ public class NavMeshRunner : MonoBehaviour {
 	{
 		NavMeshAgent.SetDestination (target);
 	}
+
 }

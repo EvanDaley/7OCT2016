@@ -18,7 +18,7 @@ public class LoadLevelTrigger : MonoBehaviour {
 	
 	void Update () 
 	{
-		print (Time.time);
+		//print (Time.time);
 		if (Time.time > timeToLoad)
 		{
 			LoadScene ();
