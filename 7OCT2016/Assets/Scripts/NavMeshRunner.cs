@@ -12,8 +12,9 @@ public class NavMeshRunner : MonoBehaviour {
 		NavMeshAgent.updateRotation = false;
 	}
 	
-	void Update () 
+	public void SetTarget (Transform target)
 	{
+		this.target = target;
 		NavMeshAgent.SetDestination (target.transform.position);
 	}
 }
