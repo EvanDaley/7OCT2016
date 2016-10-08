@@ -57,10 +57,9 @@ public class PlayerController : MonoBehaviour {
 			
 		}
 	}
-		
+
 	void Start () 
 	{
-	
 	}
 	
 	void Update () 
@@ -71,8 +70,7 @@ public class PlayerController : MonoBehaviour {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			if (Physics.Raycast (ray, out hit, 100, layerMask))
 			{
-				GameObject primitive = GameObject.CreatePrimitive (PrimitiveType.Cube);
-				primitive.transform.position = hit.point;
+				HandleTouch (hit.point);
 			}
 		}
 
@@ -85,10 +83,22 @@ public class PlayerController : MonoBehaviour {
 				Ray ray = Camera.main.ScreenPointToRay (touch.position);
 				if (Physics.Raycast (ray, out hit, 100, layerMask))
 				{
-					GameObject primitive = GameObject.CreatePrimitive (PrimitiveType.Cube);
-					primitive.transform.position = hit.point;
+					HandleTouch (hit.point);
 				}
 			}
+		}
+	}
+
+	void HandleTouch(Vector3 position)
+	{
+		if (MoveModeOn)
+		{
+			player.SetMoveTarget (position);
+		}
+
+		if (AttackModeOn)
+		{
+			player.Attack (position);
 		}
 	}
 }

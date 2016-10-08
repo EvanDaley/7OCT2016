@@ -15,6 +15,13 @@ public class NavMeshRunner : MonoBehaviour {
 	public void SetTarget (Transform target)
 	{
 		this.target = target;
-		NavMeshAgent.SetDestination (target.transform.position);
+
+		if(target != null)
+			NavMeshAgent.SetDestination (target.transform.position);
+	}
+
+	public void SetTarget (Vector3 target)
+	{
+		NavMeshAgent.SetDestination (target);
 	}
 }
